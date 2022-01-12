@@ -15,3 +15,13 @@ interface Window {
     __lib: string;
     __static: string;
 }
+
+
+interface RealTimeModel {
+    id?: string
+    name: string
+    app: string
+    version: string
+    build: string
+    create_time: Date
+  }

@@ -1,4 +1,6 @@
+import 'reflect-metadata' // Required by TypoORM.
 import setIpc from './ipcMain'
+import setDB from '../database'
 import config from '@config/index'
 import menuconfig from '../config/menu'
 import { app, BrowserWindow, Menu, dialog } from 'electron'
@@ -27,6 +29,8 @@ class MainInit {
     }
     // 启用协议
     setIpc.Mainfunc(config.IsUseSysTitle)
+    // 启用数据库
+    setDB.Setup()
   }
   // 主窗口函数
   createMainWindow() {
@@ -150,6 +154,8 @@ class MainInit {
       })
     })
     this.mainWindow.on('closed', () => {
+      // 关闭数据库
+      setDB.Destroy()
       this.mainWindow = null
     })
   }
